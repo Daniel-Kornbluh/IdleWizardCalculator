@@ -18,9 +18,7 @@ public class MemoryCalculator {
         boolean canAffordPurpose = true;
         boolean canAffordGreatness = true;
 
-        int currentMemories = memoriesToSpend;
-
-        HeritageManaHelper calc = new HeritageManaHelper(currentMemories);
+        HeritageManaHelper calc = new HeritageManaHelper(memoriesToSpend);
 
         while (canAffordPride || canAffordNobility || canAffordPurpose || canAffordGreatness) {
 
