@@ -72,28 +72,9 @@ public class HeritageManaHelper {
     private double calculateCurrentMultiplier() {
         return initialProfit * rekindledPrideOneMultiplier * forlornNobilityTwoMultiplier * forlornPurposeThreeMultiplier * forlornGreatnessFourMultiplier;
     }
+
     int getRemainingMemories() {
         return remainingMemories;
-    }
-
-    // REKINDLED PRIDE
-    double getNextRekindledPrideCost() {
-        return nextRekindledPrideCost;
-    }
-
-    // FORLORN NOBILITY
-    double getNextForlornNobilityCost() {
-        return nextForlornNobilityCost;
-    }
-
-    // FORLORN PURPOSE
-    double getNextForlornPurposeCost() {
-        return nextForlornPurposeCost;
-    }
-
-    // FORLORN GREATNESS
-    double getNextForlornGreatnessCost() {
-        return nextForlornGreatnessCost;
     }
 
     void printValues() {
@@ -117,32 +98,34 @@ public class HeritageManaHelper {
 
 
     public void buyUpgrade(NextPurchaseEnum upgradeToPurchase) {
-        int nextUpgradeCost = upgradeToPurchase.getCostIncreasePerUpgrade();
+        int nextUpgradeCostIncrease = upgradeToPurchase.getCostIncreasePerUpgrade();
         double nextUpgradeMultiplier = calculateNextUpgradeMultiplier(upgradeToPurchase);
+        double costOfUpgrade = calculateNextUpgradeMultiplier(upgradeToPurchase);
+
 
         switch (upgradeToPurchase) {
             case REKINDLED_PRIDE -> {
                 rekindledPrideOneMultiplier = nextUpgradeMultiplier;
-                remainingMemories -= getNextRekindledPrideCost();
-                nextRekindledPrideCost += nextUpgradeCost;
+                remainingMemories -= costOfUpgrade;
+                nextRekindledPrideCost += nextUpgradeCostIncrease;
                 pridePurchased++;
             }
             case FORLORN_NOBILITY -> {
                 forlornNobilityTwoMultiplier = nextUpgradeMultiplier;
-                remainingMemories -= getNextForlornNobilityCost();
-                nextForlornNobilityCost += nextUpgradeCost;
+                remainingMemories -= costOfUpgrade;
+                nextForlornNobilityCost += nextUpgradeCostIncrease;
                 nobilityPurchased++;
             }
             case FORLORN_PURPOSE -> {
                 forlornPurposeThreeMultiplier = nextUpgradeMultiplier;
-                remainingMemories -= getNextForlornPurposeCost();
-                nextForlornPurposeCost += nextUpgradeCost;
+                remainingMemories -= costOfUpgrade;
+                nextForlornPurposeCost += nextUpgradeCostIncrease;
                 purposePurchased++;
             }
             case FORLORN_GREATNESS -> {
                 forlornGreatnessFourMultiplier = nextUpgradeMultiplier;
-                remainingMemories -= getNextForlornGreatnessCost();
-                nextForlornGreatnessCost += nextUpgradeCost;
+                remainingMemories -= costOfUpgrade;
+                nextForlornGreatnessCost += nextUpgradeCostIncrease;
                 greatnessPurchased++;
             }
         }
@@ -154,6 +137,16 @@ public class HeritageManaHelper {
             case FORLORN_NOBILITY -> (forlornNobilityTwoMultiplier * 1.25);
             case FORLORN_PURPOSE -> (forlornPurposeThreeMultiplier * 1.5);
             case FORLORN_GREATNESS -> (forlornGreatnessFourMultiplier * 2);
+        };
+    }
+
+    double getNextUpgradeCost(NextPurchaseEnum nextUpgrade) {
+        return switch (nextUpgrade) {
+            case REKINDLED_PRIDE -> nextRekindledPrideCost;
+            case FORLORN_NOBILITY -> nextForlornNobilityCost;
+            case FORLORN_PURPOSE -> nextForlornPurposeCost;
+            case FORLORN_GREATNESS -> nextForlornGreatnessCost;
+
         };
     }
 }

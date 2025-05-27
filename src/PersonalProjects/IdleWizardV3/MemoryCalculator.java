@@ -23,7 +23,7 @@ public class MemoryCalculator {
         while (canAffordPride || canAffordNobility || canAffordPurpose || canAffordGreatness) {
 
             //b Pride
-            canAffordPride = calc.getRemainingMemories() >= calc.getNextRekindledPrideCost();
+            canAffordPride = calc.getRemainingMemories() >= calc.getNextUpgradeCost(REKINDLED_PRIDE);
             if (canAffordPride) {
                 nextPrideValue = calc.calculatePurchaseEfficiency(REKINDLED_PRIDE);
             }
@@ -32,7 +32,7 @@ public class MemoryCalculator {
             }
 
             //b Nobility
-            canAffordNobility = calc.getRemainingMemories() >= calc.getNextForlornNobilityCost();
+            canAffordNobility = calc.getRemainingMemories() >= calc.getNextUpgradeCost(FORLORN_NOBILITY);
             if (canAffordNobility) {
                 nextNobilityValue = calc.calculatePurchaseEfficiency(FORLORN_NOBILITY);
             }
@@ -41,7 +41,7 @@ public class MemoryCalculator {
             }
 
             //b Purpose
-            canAffordPurpose = calc.getRemainingMemories() >= calc.getNextForlornPurposeCost();
+            canAffordPurpose = calc.getRemainingMemories() >= calc.getNextUpgradeCost(FORLORN_PURPOSE);
             if (canAffordPurpose) {
                 nextPurposeValue = calc.calculatePurchaseEfficiency(FORLORN_PURPOSE);
             }
@@ -50,9 +50,9 @@ public class MemoryCalculator {
             }
 
             //b Greatness
-            canAffordGreatness = calc.getRemainingMemories() >= calc.getNextForlornGreatnessCost();
+            canAffordGreatness = calc.getRemainingMemories() >= calc.getNextUpgradeCost(FORLORN_GREATNESS);
             if (canAffordGreatness) {
-                nextGreatnessValue = calc.calculatePurchaseEfficiency(NextPurchaseEnum.FORLORN_GREATNESS);
+                nextGreatnessValue = calc.calculatePurchaseEfficiency(FORLORN_GREATNESS);
             }
             else {
                 nextGreatnessValue = 0;
