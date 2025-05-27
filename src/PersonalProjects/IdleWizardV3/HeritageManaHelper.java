@@ -1,5 +1,7 @@
 package PersonalProjects.IdleWizardV3;
 
+import static PersonalProjects.IdleWizardV3.NextPurchaseEnum.*;
+
 public class HeritageManaHelper {
     private int remainingMemories;
 
@@ -10,10 +12,10 @@ public class HeritageManaHelper {
     private double forlornPurposeThreeMultiplier = 1.0;
     private double forlornGreatnessFourMultiplier = 1.0;
 
-    private int nextRekindledPrideCost = 500;
-    private int nextForlornNobilityCost = 500;
-    private int nextForlornPurposeCost = 1000;
-    private int nextForlornGreatnessCost = 15000;
+    private int nextRekindledPrideCost = REKINDLED_PRIDE.getInitialCost();
+    private int nextForlornNobilityCost = FORLORN_NOBILITY.getInitialCost();
+    private int nextForlornPurposeCost = FORLORN_PURPOSE.getInitialCost();
+    private int nextForlornGreatnessCost = FORLORN_GREATNESS.getInitialCost();
 
     public int pridePurchased = 0;
     public int nobilityPurchased = 0;
@@ -85,7 +87,7 @@ public class HeritageManaHelper {
     void buyRekindledPride() {
         rekindledPrideOneMultiplier = calculateNextRekindledPrideMultiplier();
         remainingMemories -= getNextRekindledPrideCost();
-        nextRekindledPrideCost += 100;
+        nextRekindledPrideCost += REKINDLED_PRIDE.getCostIncreasePerUpgrade();
         pridePurchased++;
     }
 
@@ -99,7 +101,7 @@ public class HeritageManaHelper {
     void buyForlornNobility() {
         forlornNobilityTwoMultiplier = calculateNextForlornNobilityMultiplier();
         remainingMemories -= getNextForlornNobilityCost();
-        nextForlornNobilityCost += 100;
+        nextForlornNobilityCost += FORLORN_NOBILITY.getCostIncreasePerUpgrade();
         nobilityPurchased++;
     }
 
@@ -113,7 +115,7 @@ public class HeritageManaHelper {
     void buyForlornPurpose() {
         forlornPurposeThreeMultiplier = calculateNextForlornPurposeMultiplier();
         remainingMemories -= getNextForlornPurposeCost();
-        nextForlornPurposeCost += 1200;
+        nextForlornPurposeCost += FORLORN_PURPOSE.getCostIncreasePerUpgrade();
         purposePurchased++;
     }
 
@@ -127,7 +129,7 @@ public class HeritageManaHelper {
     void buyForlornGreatness() {
         forlornGreatnessFourMultiplier = calculateNextForlornGreatnessMultiplier();
         remainingMemories -= getNextForlornGreatnessCost();
-        nextForlornGreatnessCost += 6000;
+        nextForlornGreatnessCost += FORLORN_GREATNESS.getCostIncreasePerUpgrade();
         greatnessPurchased++;
     }
 
