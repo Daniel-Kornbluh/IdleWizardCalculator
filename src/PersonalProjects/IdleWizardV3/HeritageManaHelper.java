@@ -66,7 +66,6 @@ public class HeritageManaHelper {
                 double greatnessPurchaseEfficiency = (totalIncreaseAfterGreatnessPurchase / nextForlornGreatnessCost);
                 yield greatnessPurchaseEfficiency;
             }
-            case NONE -> 0;
         };
     }
 
@@ -157,7 +156,6 @@ public class HeritageManaHelper {
                 nextForlornGreatnessCost += nextUpgradeCost;
                 greatnessPurchased++;
             }
-            case NONE -> {}
         }
     }
 }

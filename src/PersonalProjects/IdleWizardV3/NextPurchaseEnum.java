@@ -1,7 +1,6 @@
 package PersonalProjects.IdleWizardV3;
 
 public enum NextPurchaseEnum {
-    NONE(0, 0, 0, 0),
     REKINDLED_PRIDE(1, 500, 100, -1),
     FORLORN_NOBILITY(2, 500, 100, 100),
     FORLORN_PURPOSE(3, 1000, 1200, 80),
