@@ -31,7 +31,7 @@ public class HeritageManaHelper {
 
         return switch (purchaseTypeToCheck) {
             case REKINDLED_PRIDE -> {
-                double multiplierAfterPridePurchase = (initialProfit * calculateNextRekindledPrideMultiplier() * forlornNobilityTwoMultiplier * forlornPurposeThreeMultiplier * forlornGreatnessFourMultiplier);
+                double multiplierAfterPridePurchase = (initialProfit * calculateNextUpgradeMultiplier(REKINDLED_PRIDE) * forlornNobilityTwoMultiplier * forlornPurposeThreeMultiplier * forlornGreatnessFourMultiplier);
                 double totalIncreaseAfterPridePurchase = (multiplierAfterPridePurchase - currentMultiplier);
                 double pridePurchaseEfficiency = (totalIncreaseAfterPridePurchase / nextRekindledPrideCost);
                 yield pridePurchaseEfficiency;
@@ -41,7 +41,7 @@ public class HeritageManaHelper {
                 if (nobilityPurchased == FORLORN_NOBILITY.getMaxPurchases()) {
                     yield 0;
                 }
-                double multiplierAfterNobilityPurchase = (initialProfit * rekindledPrideOneMultiplier * calculateNextForlornNobilityMultiplier() * forlornPurposeThreeMultiplier * forlornGreatnessFourMultiplier);
+                double multiplierAfterNobilityPurchase = (initialProfit * rekindledPrideOneMultiplier * calculateNextUpgradeMultiplier(FORLORN_NOBILITY) * forlornPurposeThreeMultiplier * forlornGreatnessFourMultiplier);
                 double totalIncreaseAfterNobilityPurchase = (multiplierAfterNobilityPurchase - currentMultiplier);
                 double nobilityPurchaseEfficiency = (totalIncreaseAfterNobilityPurchase / nextForlornNobilityCost);
                 yield nobilityPurchaseEfficiency;
@@ -51,7 +51,7 @@ public class HeritageManaHelper {
                 if (purposePurchased == FORLORN_PURPOSE.getMaxPurchases()) {
                     yield 0;
                 }
-                double multiplierAfterPurposePurchase = (initialProfit * rekindledPrideOneMultiplier * forlornNobilityTwoMultiplier * calculateNextForlornPurposeMultiplier() * forlornGreatnessFourMultiplier);
+                double multiplierAfterPurposePurchase = (initialProfit * rekindledPrideOneMultiplier * forlornNobilityTwoMultiplier * calculateNextUpgradeMultiplier(FORLORN_PURPOSE) * forlornGreatnessFourMultiplier);
                 double totalIncreaseAfterPurposePurchase = (multiplierAfterPurposePurchase - currentMultiplier);
                 double purposePurchaseEfficiency = (totalIncreaseAfterPurposePurchase / nextForlornPurposeCost);
                 yield purposePurchaseEfficiency;
@@ -61,7 +61,7 @@ public class HeritageManaHelper {
                 if (greatnessPurchased == FORLORN_GREATNESS.getMaxPurchases()) {
                     yield 0;
                 }
-                double multiplierAfterGreatnessPurchase = (initialProfit * rekindledPrideOneMultiplier * forlornNobilityTwoMultiplier * forlornPurposeThreeMultiplier * calculateNextForlornGreatnessMultiplier());
+                double multiplierAfterGreatnessPurchase = (initialProfit * rekindledPrideOneMultiplier * forlornNobilityTwoMultiplier * forlornPurposeThreeMultiplier * calculateNextUpgradeMultiplier(FORLORN_GREATNESS));
                 double totalIncreaseAfterGreatnessPurchase = (multiplierAfterGreatnessPurchase - currentMultiplier);
                 double greatnessPurchaseEfficiency = (totalIncreaseAfterGreatnessPurchase / nextForlornGreatnessCost);
                 yield greatnessPurchaseEfficiency;
@@ -76,34 +76,22 @@ public class HeritageManaHelper {
         return remainingMemories;
     }
 
-    // FORLORN PRIDE
-    private double calculateNextRekindledPrideMultiplier() {
-        return (rekindledPrideOneMultiplier + 0.5);
-    }
+    // REKINDLED PRIDE
     double getNextRekindledPrideCost() {
         return nextRekindledPrideCost;
     }
 
     // FORLORN NOBILITY
-    private double calculateNextForlornNobilityMultiplier() {
-        return (forlornNobilityTwoMultiplier * 1.25);
-    }
     double getNextForlornNobilityCost() {
         return nextForlornNobilityCost;
     }
 
     // FORLORN PURPOSE
-    double calculateNextForlornPurposeMultiplier() {
-        return (forlornPurposeThreeMultiplier * 1.5);
-    }
     double getNextForlornPurposeCost() {
         return nextForlornPurposeCost;
     }
 
     // FORLORN GREATNESS
-    double calculateNextForlornGreatnessMultiplier() {
-        return (forlornGreatnessFourMultiplier * 2);
-    }
     double getNextForlornGreatnessCost() {
         return nextForlornGreatnessCost;
     }
@@ -130,32 +118,42 @@ public class HeritageManaHelper {
 
     public void buyUpgrade(NextPurchaseEnum upgradeToPurchase) {
         int nextUpgradeCost = upgradeToPurchase.getCostIncreasePerUpgrade();
+        double nextUpgradeMultiplier = calculateNextUpgradeMultiplier(upgradeToPurchase);
 
         switch (upgradeToPurchase) {
             case REKINDLED_PRIDE -> {
-                rekindledPrideOneMultiplier = calculateNextRekindledPrideMultiplier();
+                rekindledPrideOneMultiplier = nextUpgradeMultiplier;
                 remainingMemories -= getNextRekindledPrideCost();
                 nextRekindledPrideCost += nextUpgradeCost;
                 pridePurchased++;
             }
             case FORLORN_NOBILITY -> {
-                forlornNobilityTwoMultiplier = calculateNextForlornNobilityMultiplier();
+                forlornNobilityTwoMultiplier = nextUpgradeMultiplier;
                 remainingMemories -= getNextForlornNobilityCost();
                 nextForlornNobilityCost += nextUpgradeCost;
                 nobilityPurchased++;
             }
             case FORLORN_PURPOSE -> {
-                forlornPurposeThreeMultiplier = calculateNextForlornPurposeMultiplier();
+                forlornPurposeThreeMultiplier = nextUpgradeMultiplier;
                 remainingMemories -= getNextForlornPurposeCost();
                 nextForlornPurposeCost += nextUpgradeCost;
                 purposePurchased++;
             }
             case FORLORN_GREATNESS -> {
-                forlornGreatnessFourMultiplier = calculateNextForlornGreatnessMultiplier();
+                forlornGreatnessFourMultiplier = nextUpgradeMultiplier;
                 remainingMemories -= getNextForlornGreatnessCost();
                 nextForlornGreatnessCost += nextUpgradeCost;
                 greatnessPurchased++;
             }
         }
+    }
+
+    public double calculateNextUpgradeMultiplier(NextPurchaseEnum nextUpgrade) {
+        return switch (nextUpgrade) {
+            case REKINDLED_PRIDE -> (rekindledPrideOneMultiplier + 0.5);
+            case FORLORN_NOBILITY -> (forlornNobilityTwoMultiplier * 1.25);
+            case FORLORN_PURPOSE -> (forlornPurposeThreeMultiplier * 1.5);
+            case FORLORN_GREATNESS -> (forlornGreatnessFourMultiplier * 2);
+        };
     }
 }
