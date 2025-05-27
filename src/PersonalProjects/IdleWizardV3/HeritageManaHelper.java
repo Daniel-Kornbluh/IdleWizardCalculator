@@ -17,8 +17,8 @@ public class HeritageManaHelper {
     private int nextForlornPurposeCost = FORLORN_PURPOSE.getInitialCost();
     private int nextForlornGreatnessCost = FORLORN_GREATNESS.getInitialCost();
 
-    public int pridePurchased = 0;
-    public int nobilityPurchased = 0;
+    private int pridePurchased = 0;
+    private int nobilityPurchased = 0;
     private int purposePurchased = 0;
     private int greatnessPurchased = 0;
 
@@ -148,7 +148,7 @@ public class HeritageManaHelper {
         }
     }
 
-    public double calculateNextUpgradeMultiplier(NextPurchaseEnum nextUpgrade) {
+    private double calculateNextUpgradeMultiplier(NextPurchaseEnum nextUpgrade) {
         return switch (nextUpgrade) {
             case REKINDLED_PRIDE -> (rekindledPrideOneMultiplier + 0.5);
             case FORLORN_NOBILITY -> (forlornNobilityTwoMultiplier * 1.25);
