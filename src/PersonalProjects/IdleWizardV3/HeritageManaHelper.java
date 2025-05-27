@@ -153,4 +153,13 @@ public class HeritageManaHelper {
     }
 
 
+    public void buyUpgrade(NextPurchaseEnum upgradeToPurchase) {
+        switch (upgradeToPurchase) {
+            case REKINDLED_PRIDE -> buyRekindledPride();
+            case FORLORN_NOBILITY -> buyForlornNobility();
+            case FORLORN_PURPOSE -> buyForlornPurpose();
+            case FORLORN_GREATNESS -> buyForlornGreatness();
+            case NONE -> {}
+        }
+    }
 }
