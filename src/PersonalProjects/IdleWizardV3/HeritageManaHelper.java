@@ -38,7 +38,7 @@ public class HeritageManaHelper {
             }
             case FORLORN_NOBILITY -> {
                 // Cannot purchase more than 100 nobility
-                if (nobilityPurchased == 100) {
+                if (nobilityPurchased == FORLORN_NOBILITY.getMaxPurchases()) {
                     yield 0;
                 }
                 double multiplierAfterNobilityPurchase = (initialProfit * rekindledPrideOneMultiplier * calculateNextForlornNobilityMultiplier() * forlornPurposeThreeMultiplier * forlornGreatnessFourMultiplier);
@@ -48,7 +48,7 @@ public class HeritageManaHelper {
             }
             case FORLORN_PURPOSE -> {
                 // Cannot purchase more than 80 purpose
-                if (purposePurchased == 80) {
+                if (purposePurchased == FORLORN_PURPOSE.getMaxPurchases()) {
                     yield 0;
                 }
                 double multiplierAfterPurposePurchase = (initialProfit * rekindledPrideOneMultiplier * forlornNobilityTwoMultiplier * calculateNextForlornPurposeMultiplier() * forlornGreatnessFourMultiplier);
@@ -57,8 +57,8 @@ public class HeritageManaHelper {
                 yield purposePurchaseEfficiency;
             }
             case FORLORN_GREATNESS -> {
-                // Cannot purchase more than 80 purpose
-                if (greatnessPurchased == 50) {
+                // Cannot purchase more than 50 greatness
+                if (greatnessPurchased == FORLORN_GREATNESS.getMaxPurchases()) {
                     yield 0;
                 }
                 double multiplierAfterGreatnessPurchase = (initialProfit * rekindledPrideOneMultiplier * forlornNobilityTwoMultiplier * forlornPurposeThreeMultiplier * calculateNextForlornGreatnessMultiplier());
