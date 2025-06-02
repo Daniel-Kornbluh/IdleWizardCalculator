@@ -77,31 +77,10 @@ public class HeritageManaHelper {
         return remainingMemories;
     }
 
-    void printValues() {
-        System.out.println("Purchased Rekindled Pride = " + pridePurchased + " Times");
-        System.out.println("Purchased Forlorn Nobility = " + nobilityPurchased + " Times");
-        System.out.println("Purchased Forlorn Purpose = " + purposePurchased + " Times");
-        System.out.println("Purchased Forlorn Greatness = " + greatnessPurchased + " Times");
-
-        System.out.println();
-
-        System.out.println("Final Stats for Rekindled Pride = " + rekindledPrideOneMultiplier);
-        System.out.println("Final Stats for Forlorn Nobility = " + forlornNobilityTwoMultiplier);
-        System.out.println("Final Stats for Forlorn Purpose = " + forlornPurposeThreeMultiplier);
-        System.out.println("Final Stats for Forlorn Greatness = " + forlornGreatnessFourMultiplier);
-
-        System.out.println();
-
-        System.out.println("Original Mana Per Second = " + initialProfit);
-        System.out.println("Final Mana Per Second = " + calculateCurrentMultiplier());
-    }
-
-
     public void buyUpgrade(NextPurchaseEnum upgradeToPurchase) {
         int nextUpgradeCostIncrease = upgradeToPurchase.getCostIncreasePerUpgrade();
         double nextUpgradeMultiplier = calculateNextUpgradeMultiplier(upgradeToPurchase);
-        double costOfUpgrade = calculateNextUpgradeMultiplier(upgradeToPurchase);
-
+        double costOfUpgrade = getNextUpgradeCost(upgradeToPurchase);
 
         switch (upgradeToPurchase) {
             case REKINDLED_PRIDE -> {
@@ -148,5 +127,24 @@ public class HeritageManaHelper {
             case FORLORN_GREATNESS -> nextForlornGreatnessCost;
 
         };
+    }
+
+    void printValues() {
+        System.out.println("Purchased Rekindled Pride = " + pridePurchased + " Times");
+        System.out.println("Purchased Forlorn Nobility = " + nobilityPurchased + " Times");
+        System.out.println("Purchased Forlorn Purpose = " + purposePurchased + " Times");
+        System.out.println("Purchased Forlorn Greatness = " + greatnessPurchased + " Times");
+
+        System.out.println();
+
+        System.out.println("Final Stats for Rekindled Pride = " + rekindledPrideOneMultiplier);
+        System.out.println("Final Stats for Forlorn Nobility = " + forlornNobilityTwoMultiplier);
+        System.out.println("Final Stats for Forlorn Purpose = " + forlornPurposeThreeMultiplier);
+        System.out.println("Final Stats for Forlorn Greatness = " + forlornGreatnessFourMultiplier);
+
+        System.out.println();
+
+        System.out.println("Original Mana Per Second = " + initialProfit);
+        System.out.println("Final Mana Per Second = " + calculateCurrentMultiplier());
     }
 }
