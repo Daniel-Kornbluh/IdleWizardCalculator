@@ -22,7 +22,7 @@ public class MemoryCalculator {
 
         HeritageManaHelper calc = new HeritageManaHelper(memoriesToSpend);
 
-        while (canAffordPride || canAffordNobility || canAffordPurpose || canAffordGreatness) {
+        while (canAffordPride || canAffordNobility || canAffordPurpose || canAffordGreatness || canAffordMajesty) {
 
             //b Pride
             canAffordPride = calc.getRemainingMemories() >= calc.getNextUpgradeCost(REKINDLED_PRIDE);
