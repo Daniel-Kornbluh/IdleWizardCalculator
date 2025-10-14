@@ -4,7 +4,8 @@ public enum NextPurchaseEnum {
     REKINDLED_PRIDE(1, 500, 100, -1),
     FORLORN_NOBILITY(2, 500, 100, 100),
     FORLORN_PURPOSE(3, 1000, 1200, 80),
-    FORLORN_GREATNESS(4, 15000, 6000, 50);
+    FORLORN_GREATNESS(4, 15000, 6000, 50),
+    FORLORN_MAJESTY(5, 100000, 80000, 20);
 
     private final int value;
     private final int initialCost;

@@ -4,6 +4,6 @@ public class main {
 
     public static void main(String[] args) {
         MemoryCalculator calculator = new MemoryCalculator();
-        calculator.getIdealHeritageManaPurchases2(675280);
+        calculator.getIdealHeritageManaPurchases2(3100000);
     }
 }

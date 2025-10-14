@@ -12,11 +12,13 @@ public class MemoryCalculator {
         double nextNobilityValue = 0;
         double nextPurposeValue = 0;
         double nextGreatnessValue = 0;
+        double nextMajestyValue = 0;
 
         boolean canAffordPride = true;
         boolean canAffordNobility = true;
         boolean canAffordPurpose = true;
         boolean canAffordGreatness = true;
+        boolean canAffordMajesty = true;
 
         HeritageManaHelper calc = new HeritageManaHelper(memoriesToSpend);
 
@@ -58,30 +60,42 @@ public class MemoryCalculator {
                 nextGreatnessValue = 0;
             }
 
+            //b Majesty
+            canAffordMajesty = calc.getRemainingMemories() >= calc.getNextUpgradeCost(FORLORN_MAJESTY);
+            if (canAffordMajesty) {
+                nextMajestyValue = calc.calculatePurchaseEfficiency(FORLORN_MAJESTY);
+            }
+            else {
+                nextMajestyValue = 0;
+            }
 
             ArrayList<Double> valueList = new ArrayList<>();
             valueList.add(nextPrideValue);
             valueList.add(nextNobilityValue);
             valueList.add(nextPurposeValue);
             valueList.add(nextGreatnessValue);
+            valueList.add(nextMajestyValue);
 
-            Collections.sort(valueList);
+            double maxValueUpgrade = Collections.max(valueList);
 
-            if (nextPrideValue == valueList.get(valueList.size() - 1)) {
+            if (nextPrideValue == maxValueUpgrade) {
                 calc.buyUpgrade(REKINDLED_PRIDE);
             }
-            else if (nextNobilityValue == valueList.get(valueList.size() - 1)) {
+            else if (nextNobilityValue == maxValueUpgrade) {
                 calc.buyUpgrade(FORLORN_NOBILITY);
             }
-            else if (nextPurposeValue == valueList.get(valueList.size() - 1)) {
+            else if (nextPurposeValue == maxValueUpgrade) {
                 calc.buyUpgrade(FORLORN_PURPOSE);
             }
-            else if (nextGreatnessValue == valueList.get(valueList.size() - 1)) {
+            else if (nextGreatnessValue == maxValueUpgrade) {
                 calc.buyUpgrade(FORLORN_GREATNESS);
             }
+            else if (nextMajestyValue == maxValueUpgrade) {
+                calc.buyUpgrade(FORLORN_MAJESTY);
+            }
 
-            calc.printValues();
         }
+        calc.printValues();
     }
 }
 
